@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboards — GameZone</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/leaderboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo-container">
+      <i class="fa-solid fa-gamepad logo-icon"></i>
+      <span>GAMEZONE</span>
+    </a>
+    
+    <button class="mobile-nav-toggle" id="navToggle">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="games.html" class="nav-link"><i class="fa-solid fa-chess-board"></i> Games</a></li>
+      <li><a href="leaderboard.html" class="nav-link active"><i class="fa-solid fa-trophy"></i> Leaderboard</a></li>
+      <li id="guestLinks" style="display: flex; gap: 1rem;">
+        <a href="login.html" class="btn btn-outline"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        <a href="register.html" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Register</a>
+      </li>
+      <li id="authLinks" class="nav-user" style="display: none;">
+        <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+        <a href="profile.html" class="user-badge">
+          <div class="avatar" id="navAvatar">P</div>
+          <span class="username-display" id="navUsername">Player</span>
+        </a>
+        <button id="logoutBtn" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+          <i class="fa-solid fa-power-off"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <!-- Header -->
+    <div class="leaderboard-header">
+      <h1 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 900; background: linear-gradient(135deg, #fff 0%, var(--primary-cyan) 50%, var(--secondary-purple) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        GLOBAL HALL OF FAME
+      </h1>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0.5rem auto 0;">
+        Real-time competitive standings calculated from verified server sessions.
+      </p>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="leaderboard-tabs" id="leaderboardTabs">
+      <button class="tab-btn active" data-category="overall"><i class="fa-solid fa-crown"></i> Overall Champion</button>
+      <button class="tab-btn" data-category="snake"><i class="fa-solid fa-worm"></i> Snake</button>
+      <button class="tab-btn" data-category="car-racing"><i class="fa-solid fa-car"></i> 2D Car Racing</button>
+      <button class="tab-btn" data-category="tic-tac-toe"><i class="fa-solid fa-xmark"></i> Tic-Tac-Toe</button>
+      <button class="tab-btn" data-category="memory-match"><i class="fa-solid fa-clone"></i> Memory Match</button>
+      <button class="tab-btn" data-category="rock-paper-scissors"><i class="fa-solid fa-hand-back-fist"></i> Rock-Paper-Scissors</button>
+    </div>
+
+    <!-- Top 3 Podium Display -->
+    <div class="podium-container" id="podiumContainer">
+      <!-- Dynamically filled by JS -->
+    </div>
+
+    <!-- Table Container -->
+    <div class="leaderboard-table-container">
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player Name</th>
+            <th id="scoreColumnHeader">Total Points</th>
+            <th>Games Completed</th>
+            <th>Best Session Date</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboardBody">
+          <!-- Dynamically filled by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+      <button class="page-btn" id="prevPageBtn" disabled><i class="fa-solid fa-chevron-left"></i> Previous</button>
+      <span class="page-info" id="pageInfo">Page 1 of 1</span>
+      <button class="page-btn" id="nextPageBtn" disabled>Next <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 GameZone Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/leaderboard.js"></script>
+</body>
+</html>

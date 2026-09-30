@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arcade Games — GameZone</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/games.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo-container">
+      <i class="fa-solid fa-gamepad logo-icon"></i>
+      <span>GAMEZONE</span>
+    </a>
+    
+    <button class="mobile-nav-toggle" id="navToggle">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="games.html" class="nav-link active"><i class="fa-solid fa-chess-board"></i> Games</a></li>
+      <li><a href="leaderboard.html" class="nav-link"><i class="fa-solid fa-trophy"></i> Leaderboard</a></li>
+      <li id="guestLinks" style="display: flex; gap: 1rem;">
+        <a href="login.html" class="btn btn-outline"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        <a href="register.html" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Register</a>
+      </li>
+      <li id="authLinks" class="nav-user" style="display: none;">
+        <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+        <a href="profile.html" class="user-badge">
+          <div class="avatar" id="navAvatar">P</div>
+          <span class="username-display" id="navUsername">Player</span>
+        </a>
+        <button id="logoutBtn" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+          <i class="fa-solid fa-power-off"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <!-- Game Selection Bar / Tabs -->
+    <div style="margin-bottom: 2rem;">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">GAMEZONE ARENA</h1>
+          <p class="section-subtitle">Select a game below to launch interactive play and record your score</p>
+        </div>
+      </div>
+
+      <div class="leaderboard-tabs" id="gameSelectorTabs">
+        <button class="tab-btn active" data-game="snake"><i class="fa-solid fa-worm"></i> Snake Game</button>
+        <button class="tab-btn" data-game="car-racing"><i class="fa-solid fa-car"></i> 2D Car Racing</button>
+        <button class="tab-btn" data-game="tic-tac-toe"><i class="fa-solid fa-xmark"></i> Tic-Tac-Toe</button>
+        <button class="tab-btn" data-game="memory-match"><i class="fa-solid fa-clone"></i> Memory Match</button>
+        <button class="tab-btn" data-game="rock-paper-scissors"><i class="fa-solid fa-hand-back-fist"></i> Rock-Paper-Scissors</button>
+      </div>
+    </div>
+
+    <!-- Active Game Play Area -->
+    <div class="game-arena-wrapper">
+      
+      <!-- Top HUD Stats Bar -->
+      <div class="game-hud">
+        <div class="hud-stat">
+          <span class="hud-label">Current Game</span>
+          <span class="hud-value" id="hudGameName" style="font-size: 1.2rem; color: #fff;">Snake</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-label">Current Score</span>
+          <span class="hud-value" id="hudScore">0</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-label">Personal Best</span>
+          <span class="hud-value" id="hudPersonalBest" style="color: var(--accent-green);">0</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button id="btnStartPause" class="btn btn-primary btn-sm"><i class="fa-solid fa-play"></i> Start</button>
+          <button id="btnRestart" class="btn btn-outline btn-sm"><i class="fa-solid fa-rotate-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Canvas / Board Container -->
+      <div class="canvas-container" id="canvasContainer">
+        <!-- Canvas for Snake and Car Racing -->
+        <canvas id="gameCanvas" width="600" height="400"></canvas>
+
+        <!-- Dynamic HTML Boards for TicTacToe, Memory, RPS -->
+        <div id="htmlBoardContainer" style="display: none; width: 100%; height: 100%; min-height: 400px; padding: 1.5rem; text-align: center;"></div>
+
+        <!-- Overlay Screen (Start / Pause / Game Over) -->
+        <div class="game-overlay" id="gameOverlay">
+          <h2 class="overlay-title" id="overlayTitle">READY TO PLAY?</h2>
+          <p class="overlay-subtitle" id="overlaySubtitle">Press Start to begin your game session</p>
+          
+          <div class="overlay-score-box hidden" id="overlayScoreBox">
+            <span class="overlay-score-label">Final Game Score</span>
+            <div class="overlay-score-val" id="overlayScoreVal">0</div>
+            <div id="overlayScoreStatus" style="font-size: 0.85rem; color: var(--accent-green); margin-top: 0.4rem;"></div>
+          </div>
+
+          <button id="overlayActionBtn" class="btn btn-primary" style="padding: 0.85rem 2.2rem; font-size: 1.1rem;">
+            <i class="fa-solid fa-play"></i> START GAME
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Touch Controls -->
+      <div class="mobile-controls" id="mobileControls">
+        <div></div>
+        <button class="dpad-btn" id="btnUp"><i class="fa-solid fa-chevron-up"></i></button>
+        <div></div>
+        <button class="dpad-btn" id="btnLeft"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="dpad-btn" id="btnDown"><i class="fa-solid fa-chevron-down"></i></button>
+        <button class="dpad-btn" id="btnRight"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+      <!-- Controls Explanation Box -->
+      <div class="controls-guide" id="controlsGuide">
+        <h4><i class="fa-solid fa-gamepad"></i> Game Controls & Rules</h4>
+        <p id="controlsText">Use Arrow keys or WASD to control the snake movement. Collect green food items to gain points and grow. Don't hit walls or your own tail!</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 GameZone Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+
+  <!-- Game Scripts -->
+  <script src="games/snake.js"></script>
+  <script src="games/car-racing.js"></script>
+  <script src="games/tic-tac-toe.js"></script>
+  <script src="games/memory-match.js"></script>
+  <script src="games/rock-paper-scissors.js"></script>
+
+  <!-- Main Game Hub Controller -->
+  <script src="js/games.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — GameZone</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/games.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="dashboard.html" class="logo-container">
+      <i class="fa-solid fa-gamepad logo-icon"></i>
+      <span>GAMEZONE</span>
+    </a>
+    
+    <button class="mobile-nav-toggle" id="navToggle">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="games.html" class="nav-link"><i class="fa-solid fa-chess-board"></i> Games</a></li>
+      <li><a href="leaderboard.html" class="nav-link"><i class="fa-solid fa-trophy"></i> Leaderboard</a></li>
+      <li><a href="profile.html" class="nav-link"><i class="fa-solid fa-user"></i> My Profile</a></li>
+      <li class="nav-user">
+        <a href="profile.html" class="user-badge">
+          <div class="avatar" id="dashAvatar">P</div>
+          <span class="username-display" id="dashUsername">Player</span>
+        </a>
+        <button id="logoutBtn" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;" title="Logout">
+          <i class="fa-solid fa-power-off"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <!-- Welcome Header & Quick Stats -->
+    <div style="margin-bottom: 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+      <div>
+        <h1 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #fff;">
+          WELCOME BACK, <span id="userWelcomeName" style="color: var(--primary-cyan);">PLAYER</span>!
+        </h1>
+        <p style="color: var(--text-muted);">Ready to climb the arcade leaderboard today?</p>
+      </div>
+      <a href="games.html" class="btn btn-primary"><i class="fa-solid fa-gamepad"></i> Jump Into Games</a>
+    </div>
+
+    <!-- User Stats Cards Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+      <div class="card" style="display: flex; align-items: center; gap: 1.25rem;">
+        <div style="width: 54px; height: 54px; border-radius: var(--radius-sm); background: rgba(0, 240, 255, 0.15); border: 1px solid var(--primary-cyan); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--primary-cyan);">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+        <div>
+          <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Total Games Played</span>
+          <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: #fff;" id="statTotalGames">0</h2>
+        </div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 1.25rem;">
+        <div style="width: 54px; height: 54px; border-radius: var(--radius-sm); background: rgba(176, 38, 255, 0.15); border: 1px solid var(--secondary-purple); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--secondary-purple);">
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <div>
+          <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Total Points</span>
+          <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: var(--accent-green);" id="statTotalPoints">0</h2>
+        </div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 1.25rem;">
+        <div style="width: 54px; height: 54px; border-radius: var(--radius-sm); background: rgba(0, 255, 157, 0.15); border: 1px solid var(--accent-green); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--accent-green);">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <div>
+          <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Personal Best Score</span>
+          <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: var(--primary-cyan);" id="statPersonalBest">0</h2>
+        </div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 1.25rem;">
+        <div style="width: 54px; height: 54px; border-radius: var(--radius-sm); background: rgba(255, 215, 0, 0.15); border: 1px solid var(--accent-gold); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--accent-gold);">
+          <i class="fa-solid fa-ranking-star"></i>
+        </div>
+        <div>
+          <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Overall Rank</span>
+          <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: var(--accent-gold);" id="statOverallRank">#--</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Game Card -->
+    <div class="card featured-game-card">
+      <div class="featured-content">
+        <span class="featured-badge"><i class="fa-solid fa-fire"></i> FEATURED TODAY</span>
+        <h2 class="featured-title">2D CAR RACING</h2>
+        <p class="featured-desc">
+          Test your extreme reaction times on the digital highway! Avoid oncoming speeders, dodge oil spills, and set the highest distance survival score.
+        </p>
+        <div>
+          <a href="games.html?play=car-racing" class="btn btn-primary"><i class="fa-solid fa-play"></i> Play Featured Game</a>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center; padding: 1rem;">
+        <i class="fa-solid fa-car-rear" style="font-size: 9rem; color: var(--primary-cyan); filter: drop-shadow(0 0 25px var(--primary-cyan-glow));"></i>
+      </div>
+    </div>
+
+    <!-- Recent History & Leaderboard Teaser Grid -->
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.75rem;">
+      <!-- Recent History -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--text-main);"><i class="fa-solid fa-history"></i> Recent Game History</h3>
+          <a href="profile.html" style="font-size: 0.85rem;">View Full History</a>
+        </div>
+        <div id="recentHistoryList">
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Loading recent sessions...</p>
+        </div>
+      </div>
+
+      <!-- Quick Leaderboard Link Card -->
+      <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--text-main); margin-bottom: 0.75rem;">
+            <i class="fa-solid fa-ranking-star" style="color: var(--accent-gold);"></i> Global Leaderboard
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+            Check how your top scores compare with college players across all games.
+          </p>
+        </div>
+        <a href="leaderboard.html" class="btn btn-secondary" style="width: 100%;"><i class="fa-solid fa-trophy"></i> Open Leaderboard</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 GameZone Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

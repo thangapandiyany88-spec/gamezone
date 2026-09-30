@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile — GameZone</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo-container">
+      <i class="fa-solid fa-gamepad logo-icon"></i>
+      <span>GAMEZONE</span>
+    </a>
+    
+    <button class="mobile-nav-toggle" id="navToggle">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="games.html" class="nav-link"><i class="fa-solid fa-chess-board"></i> Games</a></li>
+      <li><a href="leaderboard.html" class="nav-link"><i class="fa-solid fa-trophy"></i> Leaderboard</a></li>
+      <li><a href="profile.html" class="nav-link active"><i class="fa-solid fa-user"></i> My Profile</a></li>
+      <li class="nav-user">
+        <a href="profile.html" class="user-badge">
+          <div class="avatar" id="navAvatar">P</div>
+          <span class="username-display" id="navUsername">Player</span>
+        </a>
+        <button id="logoutBtn" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+          <i class="fa-solid fa-power-off"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
+      
+      <!-- Profile Card -->
+      <div>
+        <div class="card" style="text-align: center; position: relative;">
+          <div style="width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-cyan), var(--secondary-purple)); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: #fff; margin: 0 auto 1rem; border: 3px solid var(--primary-cyan); box-shadow: 0 0 20px var(--primary-cyan-glow);" id="profileAvatar">
+            P
+          </div>
+          <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: #fff;" id="profileFullName">Player Name</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;" id="profileEmail">player@example.com</p>
+
+          <div style="border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); padding: 1rem 0; margin-bottom: 1.5rem; text-align: left;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+              <span style="color: var(--text-muted);">Account Created:</span>
+              <span style="color: #fff; font-weight: 600;" id="profileJoinedDate">Sept 2026</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+              <span style="color: var(--text-muted);">Global Standing:</span>
+              <span style="color: var(--accent-gold); font-weight: 700;" id="profileRank">#--</span>
+            </div>
+          </div>
+
+          <button class="btn btn-outline" style="width: 100%;" id="btnEditProfile">
+            <i class="fa-solid fa-pen"></i> Edit Display Name
+          </button>
+        </div>
+
+        <!-- Update Name Form (Hidden by default) -->
+        <div class="card" id="editProfileCard" style="display: none; margin-top: 1rem;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 1rem;"><i class="fa-solid fa-user-gear"></i> Update Display Name</h3>
+          <div id="profileAlert"></div>
+          <form id="editProfileForm">
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem;">New Display Name</label>
+              <input type="text" id="newFullName" class="form-control" style="padding-left: 1rem;" required>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button type="submit" class="btn btn-primary btn-sm" style="flex: 1;">Save</button>
+              <button type="button" class="btn btn-outline btn-sm" id="btnCancelEdit">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Statistics & History -->
+      <div>
+        <!-- Stats Summary Grid -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+          <div class="card" style="padding: 1rem; text-align: center;">
+            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Games Completed</span>
+            <div style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--primary-cyan);" id="profileGamesPlayed">0</div>
+          </div>
+          <div class="card" style="padding: 1rem; text-align: center;">
+            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Total Points</span>
+            <div style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--accent-green);" id="profileTotalPoints">0</div>
+          </div>
+          <div class="card" style="padding: 1rem; text-align: center;">
+            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Highest Single Score</span>
+            <div style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--secondary-purple);" id="profileHighestScore">0</div>
+          </div>
+        </div>
+
+        <!-- Personal Bests by Game -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.5rem;">
+            <i class="fa-solid fa-medal" style="color: var(--accent-gold);"></i> Game Bests Break Down
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;" id="gameBestsGrid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Full History Table -->
+        <div class="card">
+          <h3 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.5rem;">
+            <i class="fa-solid fa-clock-rotate-left"></i> Game Session History
+          </h3>
+          <div class="leaderboard-table-container">
+            <table class="leaderboard-table" style="font-size: 0.9rem;">
+              <thead>
+                <tr>
+                  <th>Game</th>
+                  <th>Score</th>
+                  <th>Duration</th>
+                  <th>Date & Time</th>
+                </tr>
+              </thead>
+              <tbody id="fullHistoryBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 GameZone Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

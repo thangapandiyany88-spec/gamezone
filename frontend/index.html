@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameZone — Web Game Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/games.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo-container">
+      <i class="fa-solid fa-gamepad logo-icon"></i>
+      <span>GAMEZONE</span>
+    </a>
+    
+    <button class="mobile-nav-toggle" id="navToggle">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="games.html" class="nav-link"><i class="fa-solid fa-chess-board"></i> Games</a></li>
+      <li><a href="leaderboard.html" class="nav-link"><i class="fa-solid fa-trophy"></i> Leaderboard</a></li>
+      <li id="guestLinks" style="display: flex; gap: 1rem;">
+        <a href="login.html" class="btn btn-outline"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        <a href="register.html" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Register</a>
+      </li>
+      <li id="authLinks" class="nav-user" style="display: none;">
+        <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+        <a href="profile.html" class="user-badge">
+          <div class="avatar" id="navAvatar">U</div>
+          <span class="username-display" id="navUsername">Player</span>
+        </a>
+        <button id="logoutBtn" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+          <i class="fa-solid fa-power-off"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Hero Section -->
+  <main class="container">
+    <section class="card" style="margin-top: 1rem; padding: 3.5rem 2rem; text-align: center; background: linear-gradient(135deg, rgba(22, 27, 51, 0.95) 0%, rgba(10, 12, 26, 0.98) 100%); border-color: var(--primary-cyan-glow);">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <span class="featured-badge"><i class="fa-solid fa-bolt"></i> THE ULTIMATE WEB GAMING HUB</span>
+        <h1 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 900; line-height: 1.2; margin: 1rem 0; background: linear-gradient(90deg, #fff 0%, var(--primary-cyan) 50%, var(--secondary-purple) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          PLAY, COMPETE & DOMINATE THE LEADERBOARD
+        </h1>
+        <p style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2rem;">
+          Step into GameZone — an immersive arcade experience with 5 classic games, real-time score tracking, verified session persistence, and global player rankings.
+        </p>
+        <div style="display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;">
+          <a href="games.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 0.85rem 2rem;">
+            <i class="fa-solid fa-play"></i> Play Arcade Games
+          </a>
+          <a href="leaderboard.html" class="btn btn-secondary" style="font-size: 1.1rem; padding: 0.85rem 2rem;">
+            <i class="fa-solid fa-trophy"></i> View Global Ranks
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arcade Games Preview -->
+    <section style="margin-top: 3.5rem;">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">THE ARCADE COLLECTION</h2>
+          <p class="section-subtitle">Choose from 5 playable browser games built for quick fun and intense competition</p>
+        </div>
+        <a href="games.html" class="btn btn-outline">View All <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="games-grid">
+        <!-- Snake -->
+        <div class="card game-card">
+          <div class="game-thumbnail">
+            <span class="game-badge"><i class="fa-solid fa-star"></i> Arcade Classic</span>
+            <i class="fa-solid fa-worm" style="font-size: 4rem; color: var(--accent-green);"></i>
+          </div>
+          <h3 class="game-title">Snake Game</h3>
+          <p class="game-description">Navigate the classic snake, devour items to grow longer, avoid walls and your own tail!</p>
+          <div class="game-card-footer">
+            <div class="game-stat">
+              <span class="game-stat-label">Genre</span>
+              <span class="game-stat-value" style="color: var(--primary-cyan);">Reflex / Arcade</span>
+            </div>
+            <a href="games.html?play=snake" class="btn btn-primary btn-sm"><i class="fa-solid fa-play"></i> Play</a>
+          </div>
+        </div>
+
+        <!-- 2D Car Racing -->
+        <div class="card game-card">
+          <div class="game-thumbnail">
+            <span class="game-badge"><i class="fa-solid fa-gauge-high"></i> High Speed</span>
+            <i class="fa-solid fa-car-side" style="font-size: 4rem; color: var(--primary-cyan);"></i>
+          </div>
+          <h3 class="game-title">2D Car Racing</h3>
+          <p class="game-description">Dodge traffic and obstacles in a high-speed endless top-down highway survival test.</p>
+          <div class="game-card-footer">
+            <div class="game-stat">
+              <span class="game-stat-label">Genre</span>
+              <span class="game-stat-value" style="color: var(--primary-cyan);">Action Racing</span>
+            </div>
+            <a href="games.html?play=car-racing" class="btn btn-primary btn-sm"><i class="fa-solid fa-play"></i> Play</a>
+          </div>
+        </div>
+
+        <!-- Memory Match -->
+        <div class="card game-card">
+          <div class="game-thumbnail">
+            <span class="game-badge"><i class="fa-solid fa-brain"></i> Puzzle</span>
+            <i class="fa-solid fa-clone" style="font-size: 4rem; color: var(--secondary-purple);"></i>
+          </div>
+          <h3 class="game-title">Memory Match</h3>
+          <p class="game-description">Test your memory capacity by flipping cards and discovering hidden matching symbols.</p>
+          <div class="game-card-footer">
+            <div class="game-stat">
+              <span class="game-stat-label">Genre</span>
+              <span class="game-stat-value" style="color: var(--primary-cyan);">Memory Puzzle</span>
+            </div>
+            <a href="games.html?play=memory-match" class="btn btn-primary btn-sm"><i class="fa-solid fa-play"></i> Play</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 GameZone Hub. Built with HTML5, CSS3, Vanilla JS, Spring Boot & MySQL.</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
